@@ -18,10 +18,15 @@
 	</script>
     <meta charset="UTF-8">
     <style type="text/css">
+    	/* Medium devices (desktops, 992px and up) */
+		@media (min-width: @screen-md-min) { max-width: 900px; }
+
+		/* Large devices (large desktops, 1200px and up) */
+		@media (min-width: @screen-lg-min) { max-width: 900px; }
     	body {
 		    color: #333333;
     	}
-    	.container {
+    	.container-fluid {
     		max-width: 900px;
     	}
 		.customLabel {
@@ -115,7 +120,6 @@
 			return {totalScoreCorrect : 0, totalScoreIncorrect : 0};
 		},
 		handleChange: function(outcome) {
-			console.log("outcome: " + outcome.valid);
 			if (outcome.valid) {
 				this.state.totalScoreCorrect += 1;
 				this.setState({totalScoreCorrect: this.state.totalScoreCorrect});
@@ -156,7 +160,6 @@
 
 	var Question = React.createClass({
 		handleChange: function(event) {
-			console.log("ans val: " + event.target.value);
 			if(event.target.value.startsWith(this.props.answer)) {				
 				this.props.onAnswered({valid: true, number: event.target.value.split('_')[0]});
 			} else {
@@ -236,7 +239,6 @@
 				this.state.firstUnansweredNr++;
 			}
 			*/
-			console.log(result.totalScoreCorrect + "/" + result.totalScoreIncorrect);
 			this.setState({firstUnansweredNr: this.state.firstUnansweredNr, totalScoreCorrect: result.totalScoreCorrect, totalScoreIncorrect: result.totalScoreIncorrect});
 		},
 		render: function(){						
@@ -262,7 +264,7 @@
 	</script>
 </head>
 <body>
-<div id="main-content" class="container">
+<div id="main-content" class="container-fluid">
 
 	<h1>Zbrojní průkaz</h1>
 	<h3>Online tréning otázek z teoretické části testu pro skupiny A až E</h3>
