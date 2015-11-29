@@ -94,6 +94,12 @@
 		.prosgress {
 
 		}
+		.ok {
+			color: green;
+		}
+		.ko {
+			color: red;
+		}
     </style>
     <script type="text/jsx">
 
@@ -216,8 +222,8 @@
 			nanobar.go(this.props.progress);
 			return(
 				<div id="footer">
-					<div><span className="results">Postup: <strong>{this.props.progress}&nbsp;%</strong> ({this.props.countCorrect + this.props.countIncorrect} / 485) | úspěšnost: <strong>{this.props.percentage}&nbsp;%</strong> 
-						| OK: <strong>{this.props.countCorrect}</strong> | KO: <strong>{this.props.countIncorrect}</strong></span>
+					<div><span className="results">Postup: <strong>{this.props.progress}&nbsp;%</strong> ({this.props.countCorrect + this.props.countIncorrect}/{this.props.countQuestions}) | úspěšnost: <strong>{this.props.percentage}&nbsp;%</strong> 
+						| <span className="ok"><strong>{this.props.countCorrect}</strong></span> | <span className="ko"><strong>{this.props.countIncorrect}</strong></span></span>
 					</div>
 					<div className="progress">
 					  <div className="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style={{width: this.props.percentCorrect + '%'}}>správně</div>
@@ -259,6 +265,7 @@
 						countCorrect={this.state.totalScoreCorrect} 
 						countIncorrect={this.state.totalScoreIncorrect} 
 						percentage={Math.round((this.state.totalScoreCorrect)*100/(this.state.totalScoreCorrect + this.state.totalScoreIncorrect))}
+						countQuestions={countQuestions}
 					/>					
 				</div>
 			);
