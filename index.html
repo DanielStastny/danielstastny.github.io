@@ -65,7 +65,7 @@
 		}
 		#footer {
 		    position: fixed;
-		    padding: 5px 0 0 5px;
+		    padding: 5px 0 2px 0;
 		    bottom: 0;
 		    left: 0;
 		    font-size: 15px;
@@ -91,8 +91,9 @@
 			width: 100%;
 			text-align: center;
 		}
-		.prosgress {
-
+		.progress {
+			padding: 0;
+			margin: 2px 3px 2px 3px;
 		}
 		.ok {
 			color: green;
@@ -222,12 +223,12 @@
 			nanobar.go(this.props.progress);
 			return(
 				<div id="footer">
-					<div><span className="results">Postup: <strong>{this.props.progress}&nbsp;%</strong> ({this.props.countCorrect + this.props.countIncorrect}/{this.props.countQuestions}) | úspěšnost: <strong>{this.props.percentage}&nbsp;%</strong> 
-						| <span className="ok"><strong>{this.props.countCorrect}</strong></span> | <span className="ko"><strong>{this.props.countIncorrect}</strong></span></span>
-					</div>
 					<div className="progress">
 					  <div className="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style={{width: this.props.percentCorrect + '%'}}>správně</div>
 					  <div className="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style={{width: this.props.percentIncorrect + '%'}}>špatně</div>
+					</div>
+					<div><span className="results"><small>Postup: <strong>{this.props.progress}&nbsp;%</strong> ({this.props.countCorrect + this.props.countIncorrect}/{this.props.countQuestions}) | úspěšnost: <strong>{this.props.percentage}&nbsp;%</strong> 
+						| <span className="ok"><strong>{this.props.countCorrect}</strong></span> | <span className="ko"><strong>{this.props.countIncorrect}</strong></span></small></span>
 					</div>
 				</div>
 			);
