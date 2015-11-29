@@ -216,8 +216,8 @@
 			nanobar.go(this.props.progress);
 			return(
 				<div id="footer">
-					<div><span className="results">Postup: <strong>{this.props.progress}&nbsp;%</strong> ({this.props.countCorrect + this.props.countIncorrect} / 485) | aktuální úspěšnost: <strong>{this.props.percentage}&nbsp;%</strong> 
-						| správně: <strong>{this.props.countCorrect}</strong> | špatně: <strong>{this.props.countIncorrect}</strong></span>
+					<div><span className="results">Postup: <strong>{this.props.progress}&nbsp;%</strong> ({this.props.countCorrect + this.props.countIncorrect} / 485) | úspěšnost: <strong>{this.props.percentage}&nbsp;%</strong> 
+						| OK: <strong>{this.props.countCorrect}</strong> | KO: <strong>{this.props.countIncorrect}</strong></span>
 					</div>
 					<div className="progress">
 					  <div className="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style={{width: this.props.percentCorrect + '%'}}>správně</div>
