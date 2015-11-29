@@ -30,6 +30,12 @@
     	.container-fluid {
     		max-width: 900px;
     	}
+    	.infobox {
+    		border: 1px solid #E8E8E8;
+    		margin: 2em 0 2em 0;
+    		padding: 1em;
+    		background-color: #F8F8F8;
+    	}
 		.customLabel {
 		    display: block;
 		    margin: 10px 15px 10px 15px;
@@ -279,21 +285,24 @@
 
 	<h1>Zbrojní průkaz</h1>
 	<h3>Online tréning otázek z teoretické části testu pro skupiny A až E</h3>
-	<hr className="divider"/>
-	<p>Aktuální testové otázky (<a href="http://www.mvcr.cz/clanek/zkousky-odborne-zpusobilosti.aspx" target="_blank">MVČR 1.7.2014</a>) používané pro všechny kategorie zbrojních průkazů. Pro reset stačí aktualizovat stránku. 
-	Následující kvíz je zaměřen na dril otázek - kontext hledejte na <a href="http://zbranekvalitne.cz" target="_blank">zbranekvalitne.cz</a></p>
-	<p>Otázky testují 
-		<ul>
-			<li><a href="http://www.zakonyprolidi.cz/cs/2002-119" target="_blank">předpis č. 119/2002 Sb. - Zákon o zbraních</a>,</li> 
-			<li><a href="https://www.zakonyprolidi.cz/cs/2014-115" target="_blank">předpis č. 115/2014 Sb. - Vyhláška o provedení některých ustanovení zákona o zbraních</a>,</li> 
-			<li><a href="https://www.zakonyprolidi.cz/cs/2002-338" target="_blank">předpis č. 338/2002 Sb. – Nařízení vlády o technických požadavcích pro zabezpečení přechovávaných zbraní</a>,</li>
-			<li><a href="http://www.zakonyprolidi.cz/cs/2009-40" target="_blank">předpis č. 40/2009 Sb. – Trestní Zákoník</a> - zejména <a href="http://www.zakonyprolidi.cz/cs/2009-40#p29" target="_blank">§29</a>,</li>
-			<li><a href="http://www.zakonyprolidi.cz/cs/2000-156" target="_blank">předpis č. 156/2000 Sb. – Zákon o ověřování střelných zbraní, střeliva a pyrotechnických předmětů</a>,</li>
-			<li>nauku o <a href="http://zbranekvalitne.cz/zbrojni-prukaz/nauka-o-zbranich/" target="_blank">zbraních</a> a <a href="http://zbranekvalitne.cz/zbrojni-prukaz/nauka-o-strelivu/" target="_blank">střelivu</a>,</li>
-			<li><a href="http://www.cervenykriz.eu/" target="_blank">zdravotní minimum</a>.</li>
-		</ul>
-	</p>
-	<hr className="divider"/>
+	
+	<div class="infobox">
+		<p>Aktuální testové otázky (<a href="http://www.mvcr.cz/clanek/zkousky-odborne-zpusobilosti.aspx" target="_blank">MVČR 1.7.2014</a>) používané pro všechny kategorie zbrojních průkazů. 
+		Kontext hledejte na <a href="http://zbranekvalitne.cz" target="_blank">zbranekvalitne.cz</a></p>
+		<p>Otázky testují 
+			<ul>
+				<li><a href="http://www.zakonyprolidi.cz/cs/2002-119" target="_blank">předpis č. 119/2002 Sb. - Zákon o zbraních</a>,</li> 
+				<li><a href="https://www.zakonyprolidi.cz/cs/2014-115" target="_blank">předpis č. 115/2014 Sb. - Vyhláška o provedení některých ustanovení zákona o zbraních</a>,</li> 
+				<li><a href="https://www.zakonyprolidi.cz/cs/2002-338" target="_blank">předpis č. 338/2002 Sb. – Nařízení vlády o technických požadavcích pro zabezpečení přechovávaných zbraní</a>,</li>
+				<li><a href="http://www.zakonyprolidi.cz/cs/2009-40" target="_blank">předpis č. 40/2009 Sb. – Trestní Zákoník</a> - zejména <a href="http://www.zakonyprolidi.cz/cs/2009-40#p29" target="_blank">§29</a>,</li>
+				<li><a href="http://www.zakonyprolidi.cz/cs/2000-156" target="_blank">předpis č. 156/2000 Sb. – Zákon o ověřování střelných zbraní, střeliva a pyrotechnických předmětů</a>,</li>
+				<li>nauku o <a href="http://zbranekvalitne.cz/zbrojni-prukaz/nauka-o-zbranich/" target="_blank">zbraních</a> a <a href="http://zbranekvalitne.cz/zbrojni-prukaz/nauka-o-strelivu/" target="_blank">střelivu</a>,</li>
+				<li><a href="http://www.cervenykriz.eu/" target="_blank">zdravotní minimum</a>.</li>
+			</ul>
+		</p>
+
+		<p>Vždy po aktualizaci stránky se otázky načtou v <strong>náhodném</strong> pořadí. Po načtení stránky může web fungovat i offline ✈</p>
+	</div>
 	<span className="author">Napsáno v <a href="https://facebook.github.io/react/" target="_blank">react.js</a> ♥, kontakt:  
 	<a href="http://danielstastny.com" target="_blank">Daniel Šťastný</a> <a href="mailto:daniel.stastny@gmail.com">✉</a><br /><small>Autor nenese žádnou odpovědnost za správnost obsahu na této stránce.</small></span>
 	<hr className="divider"/>
