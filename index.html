@@ -77,8 +77,14 @@
 		    font-size: 15px;
 		    width: 100%;
 		    background-color: #f5f5f5;
-		    border-top: 2px solid #e7e7e7;
 		    text-align: center;
+		}
+		.naviFooter {
+			position: fixed;
+			bottom: 60px;
+			right: 10px;
+			background-color: #e7e7e7; 
+			padding: 5px;
 		}
 		.question-text {
 			margin: 5px 15px 5px 15px;
@@ -133,7 +139,7 @@
 	
 	var QuestionList = React.createClass({
 		getInitialState: function() {
-			return {totalScoreCorrect : 0, totalScoreIncorrect : 0};
+			return {answeredQuestionNr: 0, totalScoreCorrect : 0, totalScoreIncorrect : 0};
 		},
 		handleChange: function(outcome) {
 			if (outcome.valid) {
@@ -143,7 +149,7 @@
 				this.state.totalScoreIncorrect += 1;
 				this.setState({totalScoreIncorrect: this.state.totalScoreIncorrect});
 			}
-			this.props.onSubmitted({totalScoreCorrect: this.state.totalScoreCorrect, totalScoreIncorrect: this.state.totalScoreIncorrect});
+			this.props.onSubmitted({answeredQuestionNr: outcome.number, totalScoreCorrect: this.state.totalScoreCorrect, totalScoreIncorrect: this.state.totalScoreIncorrect});
 		},
 		render: function(){
 			var mark = 1;
@@ -176,10 +182,10 @@
 
 	var Question = React.createClass({
 		handleChange: function(event) {
-			if(event.target.value.startsWith(this.props.answer)) {				
-				this.props.onAnswered({valid: true, number: event.target.value.split('_')[0]});
+			if(event.target.value.startsWith(this.props.answer)) {			
+				this.props.onAnswered({valid: true, number: event.target.value.split('_')[1]});
 			} else {
-				this.props.onAnswered({valid: false, number: event.target.value.split('_')[0]});
+				this.props.onAnswered({valid: false, number: event.target.value.split('_')[1]});
 			}
 			this.setState({
       			answered: event.target.value.split('_')[0]
@@ -228,13 +234,18 @@
 		render: function(){
 			nanobar.go(this.props.progress);
 			return(
-				<div id="footer">
-					<div className="progress">
-					  <div className="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style={{width: this.props.percentCorrect + '%'}}>správně</div>
-					  <div className="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style={{width: this.props.percentIncorrect + '%'}}>špatně</div>
+				<div>
+					<div className="naviFooter">
+						<span><a href={"#question_" + this.props.firstUnansweredNr} title="K první nezodpovězené otázce">▲</a></span>
 					</div>
-					<div><span className="results"><small>Postup: <strong>{this.props.progress}&nbsp;%</strong> ({this.props.countCorrect + this.props.countIncorrect}/{this.props.countQuestions}) | úspěšnost: <strong>{this.props.percentage}&nbsp;%</strong> 
-						| <span className="ok"><strong>{this.props.countCorrect}</strong></span> | <span className="ko"><strong>{this.props.countIncorrect}</strong></span></small></span>
+					<div id="footer">
+						<div className="progress">
+						  <div className="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style={{width: this.props.percentCorrect + '%'}}>správně</div>
+						  <div className="progress-bar progress-bar-danger progress-bar-striped active" role="progressbar" style={{width: this.props.percentIncorrect + '%'}}>špatně</div>
+						</div>
+						<div><span className="results"><small>Postup: <strong>{this.props.progress}&nbsp;%</strong> ({this.props.countCorrect + this.props.countIncorrect}/{this.props.countQuestions}) | úspěšnost: <strong>{this.props.percentage}&nbsp;%</strong> 
+							| <span className="ok"><strong>{this.props.countCorrect}</strong></span> | <span className="ko"><strong>{this.props.countIncorrect}</strong></span></small></span>
+						</div>
 					</div>
 				</div>
 			);
@@ -246,16 +257,27 @@
 	var TestMain = React.createClass({
 		getInitialState: function() {
 			shuffle(this.props.details.questions)
-			return {firstUnansweredNr: 1, totalScoreCorrect : 0, totalScoreIncorrect : 0};
+			return {answeredQs: [], lastQNr: 1, totalScoreCorrect : 0, totalScoreIncorrect : 0};
 		},
 		handleChange: function(result) {
 			// Check difference
-			/*
-			if ((result.answeredQNr - this.state.firstUnansweredNr) == 1) {
-				this.state.firstUnansweredNr++;
+			// console.log(result.answeredQuestionNr);
+			this.state.answeredQs.push(parseInt(result.answeredQuestionNr, 10));
+			this.state.answeredQs = this.state.answeredQs.sort(function(a,b) {
+  				return (+a) - (+b);
+			});
+			// console.log(this.state.answeredQs);
+			this.setState({answeredQs: this.state.answeredQs});
+
+			for (i = 0; i < this.state.answeredQs.length + 1; i++) {
+    			var currentQ = i + 1;
+    			var nr = this.state.answeredQs[i];
+    			if (currentQ != nr) {
+    				this.setState({lastQNr: currentQ});
+    				break;
+    			}
 			}
-			*/
-			this.setState({firstUnansweredNr: this.state.firstUnansweredNr, totalScoreCorrect: result.totalScoreCorrect, totalScoreIncorrect: result.totalScoreIncorrect});
+			this.setState({totalScoreCorrect: result.totalScoreCorrect, totalScoreIncorrect: result.totalScoreIncorrect});
 		},
 		render: function(){						
 			var countQuestions = this.props.details.questions.length;
@@ -273,6 +295,7 @@
 						countIncorrect={this.state.totalScoreIncorrect} 
 						percentage={Math.round((this.state.totalScoreCorrect)*100/(this.state.totalScoreCorrect + this.state.totalScoreIncorrect))}
 						countQuestions={countQuestions}
+						firstUnansweredNr={this.state.lastQNr}
 					/>					
 				</div>
 			);
